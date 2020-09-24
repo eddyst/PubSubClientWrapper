@@ -1,0 +1,15 @@
+{
+  "name": "PubSubClientWrapper",
+  "version": "0.0.2",
+  "description": "Wrapper for PubSubClient",
+  "keywords": "PubSubClient,ethernet,mqtt,m2m,iot", 
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/eddyst/PubSubClientWrapper.git"
+  },
+  "dependencies": 
+  {
+     "PubSubClient": ">0"
+  }
+}
