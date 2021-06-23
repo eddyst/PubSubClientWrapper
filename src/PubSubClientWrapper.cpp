@@ -3,11 +3,11 @@
 PubSubClientWrapper::PubSubClientWrapper(Client& espc) : PubSubClient(espc){
 }
 
-bool PubSubClientWrapper::publish(StringSumHelper topic, String str) {
+bool PubSubClientWrapper::publish(String topic, String str) {
   return publish(topic.c_str(), str);
 }
 
-bool PubSubClientWrapper::publish(StringSumHelper topic, unsigned int num) {
+bool PubSubClientWrapper::publish(String topic, unsigned int num) {
   return publish(topic.c_str(), num);
 }
 
@@ -19,11 +19,11 @@ bool PubSubClientWrapper::publish(const char* topic, unsigned int num) {
   return publish(topic, num, false);
 }
 
-bool PubSubClientWrapper::publish(StringSumHelper topic, String str, bool retain) {
+bool PubSubClientWrapper::publish(String topic, String str, bool retain) {
   return publish(topic.c_str(), str, retain);
 }
 
-bool PubSubClientWrapper::publish(StringSumHelper topic, unsigned int num, bool retain) {
+bool PubSubClientWrapper::publish(String topic, unsigned int num, bool retain) {
   return publish(topic.c_str(), num, retain);
 }
 
