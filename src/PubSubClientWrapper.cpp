@@ -3,11 +3,23 @@
 PubSubClientWrapper::PubSubClientWrapper(Client& espc) : PubSubClient(espc){
 }
 
+bool PubSubClientWrapper::subscribe(String topic) {
+  return PubSubClient::subscribe(topic.c_str());
+}
+
+bool PubSubClientWrapper::subscribe(String topic, uint8_t qos) {
+  return PubSubClient::subscribe(topic.c_str(), qos);
+}
+
 bool PubSubClientWrapper::publish(String topic, String str) {
   return publish(topic.c_str(), str);
 }
 
 bool PubSubClientWrapper::publish(String topic, unsigned int num) {
+  return publish(topic.c_str(), num);
+}
+
+bool PubSubClientWrapper::publish(String topic, float num) {
   return publish(topic.c_str(), num);
 }
 
@@ -19,6 +31,10 @@ bool PubSubClientWrapper::publish(const char* topic, unsigned int num) {
   return publish(topic, num, false);
 }
 
+bool PubSubClientWrapper::publish(const char* topic, float num) {
+  return publish(topic, num, false);
+}
+
 bool PubSubClientWrapper::publish(String topic, String str, bool retain) {
   return publish(topic.c_str(), str, retain);
 }
@@ -27,19 +43,26 @@ bool PubSubClientWrapper::publish(String topic, unsigned int num, bool retain) {
   return publish(topic.c_str(), num, retain);
 }
 
+bool PubSubClientWrapper::publish(String topic, float num, bool retain) {
+  return publish(topic.c_str(), num, retain);
+}
+
 bool PubSubClientWrapper::publish(const char* topic, String str, bool retain) {
   char buf[128];
-
   if(str.length() >= 128) return false;
-
   str.toCharArray(buf, 128);
   return PubSubClient::publish(topic, buf, retain);
 }
 
 bool PubSubClientWrapper::publish(const char* topic, unsigned int num, bool retain) {
   char buf[6];
-
   dtostrf(num, 0, 0, buf);
+  return PubSubClient::publish(topic, buf, retain);
+}
+
+bool PubSubClientWrapper::publish(const char* topic, float num, bool retain) {
+  char buf[10];
+  dtostrf(num, 0, 3, buf);
   return PubSubClient::publish(topic, buf, retain);
 }
 
