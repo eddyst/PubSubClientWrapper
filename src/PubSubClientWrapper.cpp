@@ -15,7 +15,15 @@ bool PubSubClientWrapper::publish(String topic, String str) {
   return publish(topic.c_str(), str);
 }
 
-bool PubSubClientWrapper::publish(String topic, unsigned int num) {
+bool PubSubClientWrapper::publish(String topic, uint8_t num) {
+  return publish(topic.c_str(), num);
+}
+
+bool PubSubClientWrapper::publish(String topic, uint16_t num) {
+  return publish(topic.c_str(), num);
+}
+
+bool PubSubClientWrapper::publish(String topic, uint32_t num) {
   return publish(topic.c_str(), num);
 }
 
@@ -27,7 +35,15 @@ bool PubSubClientWrapper::publish(const char* topic, String str) {
   return publish(topic, str, false);
 }
 
-bool PubSubClientWrapper::publish(const char* topic, unsigned int num) {
+bool PubSubClientWrapper::publish(const char* topic, uint8_t num) {
+  return publish(topic, num, false);
+}
+
+bool PubSubClientWrapper::publish(const char* topic, uint16_t num) {
+  return publish(topic, num, false);
+}
+
+bool PubSubClientWrapper::publish(const char* topic, uint32_t num) {
   return publish(topic, num, false);
 }
 
@@ -39,7 +55,15 @@ bool PubSubClientWrapper::publish(String topic, String str, bool retain) {
   return publish(topic.c_str(), str, retain);
 }
 
-bool PubSubClientWrapper::publish(String topic, unsigned int num, bool retain) {
+bool PubSubClientWrapper::publish(String topic, uint8_t num, bool retain) {
+  return publish(topic.c_str(), num, retain);
+}
+
+bool PubSubClientWrapper::publish(String topic, uint16_t num, bool retain) {
+  return publish(topic.c_str(), num, retain);
+}
+
+bool PubSubClientWrapper::publish(String topic, uint32_t num, bool retain) {
   return publish(topic.c_str(), num, retain);
 }
 
@@ -54,8 +78,20 @@ bool PubSubClientWrapper::publish(const char* topic, String str, bool retain) {
   return PubSubClient::publish(topic, buf, retain);
 }
 
-bool PubSubClientWrapper::publish(const char* topic, unsigned int num, bool retain) {
+bool PubSubClientWrapper::publish(const char* topic, uint8_t num, bool retain) {
+  char buf[4];
+  dtostrf(num, 0, 0, buf);
+  return PubSubClient::publish(topic, buf, retain);
+}
+
+bool PubSubClientWrapper::publish(const char* topic, uint16_t num, bool retain) {
   char buf[6];
+  dtostrf(num, 0, 0, buf);
+  return PubSubClient::publish(topic, buf, retain);
+}
+
+bool PubSubClientWrapper::publish(const char* topic, uint32_t num, bool retain) {
+  char buf[11];
   dtostrf(num, 0, 0, buf);
   return PubSubClient::publish(topic, buf, retain);
 }
